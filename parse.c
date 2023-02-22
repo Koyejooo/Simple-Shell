@@ -1,4 +1,4 @@
-#include "shell.h"
+#include "simshell.h"
 
 /**
  * is_cmd - a function that determines whether a file is an executable command
