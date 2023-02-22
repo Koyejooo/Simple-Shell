@@ -1,4 +1,4 @@
-include "shell.h"
+include "simshell.h"
 
 /**
  * input_buf - function that buffers chained commands
