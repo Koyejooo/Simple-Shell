@@ -3,12 +3,12 @@
 #include <stdlib.h>
 
 /**
- * **strtow - function that splits str into words (rpt delimiters are ignored)
- * @str: incoming argument for the input string
- * @d: incoming argument for the delimiter string
- *
- * Return: a ptr to an array of strings, or NULL on failure
+ * **strtow - splits a string into words. Repeat delimiters are ignored
+ * @str: the input string
+ * @d: the delimeter string
+ * Return: a pointer to an array of strings, or NULL on failure
  */
+
 char **strtow(char *str, char *d)
 {
 	int i, j, k, m, numwords = 0;
@@ -19,9 +19,9 @@ char **strtow(char *str, char *d)
 	if (!d)
 		d = " ";
 	for (i = 0; str[i] != '\0'; i++)
-		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d ||
-						!str[i + 1])))
+		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
 			numwords++;
+
 	if (numwords == 0)
 		return (NULL);
 	s = malloc((1 + numwords) * sizeof(char *));
@@ -31,6 +31,9 @@ char **strtow(char *str, char *d)
 	{
 		while (is_delim(str[i], d))
 			i++;
+		k = 0;
+		while (!is_delim(str[i + k], d) && str[i + k])
+			k++;
 		s[j] = malloc((k + 1) * sizeof(char));
 		if (!s[j])
 		{
@@ -48,10 +51,9 @@ char **strtow(char *str, char *d)
 }
 
 /**
- * **strtow2 - a function that splits a string into words
- * @str: incoming argument for the input string
- * @d: incoming arguments for the delimiter
- *
+ * **strtow2 - splits a string into words
+ * @str: the input string
+ * @d: the delimeter
  * Return: a pointer to an array of strings, or NULL on failure
  */
 char **strtow2(char *str, char d)
@@ -61,9 +63,9 @@ char **strtow2(char *str, char d)
 
 	if (str == NULL || str[0] == 0)
 		return (NULL);
-	for (i = 0, str[i] != '\0'; i++)
+	for (i = 0; str[i] != '\0'; i++)
 		if ((str[i] != d && str[i + 1] == d) ||
-			(str[i] != d && !str[i + 1] || str[i + q] == d))
+		    (str[i] != d && !str[i + 1]) || str[i + 1] == d)
 			numwords++;
 	if (numwords == 0)
 		return (NULL);
